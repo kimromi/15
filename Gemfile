@@ -9,6 +9,9 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 gem 'puma', '~> 3.7'
 
+gem 'devise'
+gem 'omniauth-twitter'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
