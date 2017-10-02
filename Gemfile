@@ -11,7 +11,6 @@ gem 'puma', '~> 3.7'
 
 gem 'slim-rails'
 
-gem 'devise'
 gem 'omniauth-twitter'
 
 group :development do

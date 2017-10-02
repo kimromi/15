@@ -2,5 +2,8 @@ Rails.application.routes.draw do
   root 'top#index'
   get 'top/index'
 
-  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
+  get '/auth/:provider/callback', to: 'sessions#create'
+
+  get '/app', to: 'app#index'
+  get '/signout', to: 'sessions#destroy'
 end
