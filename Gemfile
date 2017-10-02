@@ -9,6 +9,7 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 gem 'puma', '~> 3.7'
 
+gem 'dotenv-rails'
 gem 'slim-rails'
 
 gem 'omniauth-twitter'
