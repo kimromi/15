@@ -11,4 +11,17 @@ class Identity < ApplicationRecord
       find_or_create_by(uid: auth['uid'], provider: auth['provider'].to_sym)
     end
   end
+
+  def create_user!(auth)
+    create_user!(
+      name: auth['info']['nickname']
+    )
+  end
+
+  def save_with_omniauth!(auth)
+    self.nickname = auth['info']['nickname']
+    self.email = auth['info']['email']
+    self.image = auth['info']['image']
+    save!
+  end
 end

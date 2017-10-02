@@ -8,15 +8,13 @@ class SessionsController < ApplicationController
         notice = 'Already linked that account!'
       else
         identity.user = current_user
-        identity.save!
+        identity.save_with_omniauth!(auth)
         notice = 'Successfully linked that account!'
       end
     else
       unless identity.user.present?
-        identity.create_user!(
-          name: auth['info']['nickname']
-        )
-        identity.save!
+        identity.create_user!(auth)
+        identity.save_with_omniauth!(auth)
       end
       sign_in(identity.user)
       notice = 'Signed in!'
