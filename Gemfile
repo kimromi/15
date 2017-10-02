@@ -13,6 +13,7 @@ gem 'dotenv-rails'
 gem 'slim-rails'
 
 gem 'omniauth-twitter'
+gem 'omniauth-github'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

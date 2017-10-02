@@ -1,1 +1,11 @@
 = link_to 'sign out', signout_path
+
+- if current_user.twitter_registered?
+  p twitter
+- else
+  = link_to 'connect Twitter', '/auth/twitter'
+
+- if current_user.github_registered?
+  p github
+- else
+  = link_to 'connect GutHub', '/auth/github'
