@@ -1,6 +1,7 @@
 class Identity < ApplicationRecord
   belongs_to :user
-  has_one :identity_twitter
+  has_one :identity_twitter, class_name: Identity::Twitter
+  has_one :identity_github, class_name: Identity::Github
 
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
@@ -30,6 +31,10 @@ class Identity < ApplicationRecord
       create_identity_twitter!(
         token: auth['credentials']['token'],
         secret: auth['credentials']['secret']
+      )
+    when :github
+      create_identity_github!(
+        token: auth['credentials']['token']
       )
     end
   end

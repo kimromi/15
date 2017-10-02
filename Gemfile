@@ -12,8 +12,12 @@ gem 'puma', '~> 3.7'
 gem 'dotenv-rails'
 gem 'slim-rails'
 
+# omniauth
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+
+# API client
+gem 'twitter'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
