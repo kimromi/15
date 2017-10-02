@@ -1,5 +1,6 @@
 class Identity < ApplicationRecord
   belongs_to :user
+  has_one :identity_twitter
 
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
@@ -12,7 +13,7 @@ class Identity < ApplicationRecord
     end
   end
 
-  def create_user!(auth)
+  def create_user_with_omniauth!(auth)
     create_user!(
       name: auth['info']['nickname']
     )
@@ -23,5 +24,13 @@ class Identity < ApplicationRecord
     self.email = auth['info']['email']
     self.image = auth['info']['image']
     save!
+
+    case provider.to_sym
+    when :twitter
+      create_identity_twitter!(
+        token: auth['credentials']['token'],
+        secret: auth['credentials']['secret']
+      )
+    end
   end
 end

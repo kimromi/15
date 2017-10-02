@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to app_path, notice: 'Successfully linked that account!'
     else
       unless identity.user.present?
-        identity.create_user!(auth)
+        identity.create_user_with_omniauth!(auth)
         identity.save_with_omniauth!(auth)
       end
       sign_in(identity.user)
