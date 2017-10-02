@@ -4,23 +4,19 @@ class SessionsController < ApplicationController
     identity = Identity.find_or_create_with_omniauth(auth)
 
     if signed_in?
-      if identity.user == current_user
-        notice = 'Already linked that account!'
-      else
+      unless identity.user == current_user
         identity.user = current_user
         identity.save_with_omniauth!(auth)
-        notice = 'Successfully linked that account!'
       end
+      redirect_to app_path, notice: 'Successfully linked that account!'
     else
       unless identity.user.present?
         identity.create_user!(auth)
         identity.save_with_omniauth!(auth)
       end
       sign_in(identity.user)
-      notice = 'Signed in!'
+      redirect_to app_path, notice: 'Signed in!'
     end
-
-    redirect_to app_path, notice: notice
   end
 
   def destroy
