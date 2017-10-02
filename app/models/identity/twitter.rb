@@ -5,6 +5,8 @@ class Identity::Twitter < ApplicationRecord
     client.user_timeline
   end
 
+  private
+
   def client
     @client ||= Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']

@@ -18,6 +18,7 @@ gem 'omniauth-github'
 
 # API client
 gem 'twitter'
+gem 'octokit'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -27,6 +28,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'pry-byebug'
 end
 
