@@ -2,6 +2,7 @@ class Identity::Github < ApplicationRecord
   belongs_to :identity
 
   def events(from = nil, to = nil)
+    now = Time.now
     from ||= Time.new(now.year, now.month, now.day)
     to ||= now
 

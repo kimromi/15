@@ -11,6 +11,7 @@ gem 'puma', '~> 3.7'
 
 gem 'dotenv-rails'
 gem 'slim-rails'
+gem 'sass-rails'
 
 # omniauth
 gem 'omniauth-twitter'
