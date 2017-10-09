@@ -1,11 +1,14 @@
 language: node_js
 node_js:
-  - 8
+- 8
 install:
-  - yarn
+- yarn
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 script:
-  - yarn lint
+- yarn lint
+notifications:
+  slack:
+    secure: POpGYSXMxilaWNk+W0lWVBQ1gaiusc1g/2W0Mx5Z8IXIMeqcyxj1DUvmKAkfsY9HI5TmL22Uv1/ChR1YG3NU/6vbZBV4ajTPWW8qohkD5M6mE/ANlPgI8TVWtATYeZaXpjgy/xq3PChrv9VWREcspaIZQDtb9cIgwQb0DWsY+5ZVd758d4EO9hyOCS+PUnMlNwmgIBqkoGt94SisfP9AS15XOvMEmJRS+S9XDCCj1OoU7zgQTMH2CjcXUlWx34WMpoMYtKeIUOp896+w1GtdHqrfyACT3AyrV0lMu9k9GGWtWdhnj+OeoM/3Yfd+B6N1oefoMwYgYTcFZKIm/Sv4JldKZx81qKkA3PcqQ8mi35KZsZ9E7aajWXuj+CkPFcYUdJ3WHOwE+cn86W2sMyR2CWRgKMAeEoNYuNWfmwein4N/XskJfy4Z5YTmg2l4VWmBAc56xtGNMmgBSJpVimGrlsu9FRIVVfv3GcdJUUbluSMobr7jZSYtdtC2wU46YMYBA7LBCzulLlR3BqNMhF0m0urfEHWa9PAREiplYyO6/I/jZpWuHVPkmOL0uNZHJuEa62o1wxfdWAKkVA57urimTy9U2wwuParkzVdu3CctI/HLd85bfXp5FyRjObNpnHJXLs5q4wn6Ns1gCM1MjHQy9RUeKp8W596ua3xOvZGkLrc=
