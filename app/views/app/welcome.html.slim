@@ -3,9 +3,6 @@
     .col.s12.m8
       h1 fifteen
     .col.s12.m4
-      - if signed_in?
-        = link_to 'App', app_path, class: 'btn-large waves-effect waves-light'
-      - else
         = link_to '/auth/twitter', class: 'btn btn-block btn-twitter'
           i.fa.fa-twitter.material-icons.left
           | Twitter

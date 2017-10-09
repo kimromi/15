@@ -1,6 +1,5 @@
 class AppController < ApplicationController
-  before_action :authenticate_user!
-
   def index
+    render template: 'app/welcome' unless signed_in?
   end
 end
