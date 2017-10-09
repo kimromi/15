@@ -12,9 +12,9 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import Twitter from './settings/twitter.vue'
-  import Github from './settings/github.vue'
+  import axios from 'axios';
+  import Twitter from './settings/twitter.vue';
+  import Github from './settings/github.vue';
 
   export default {
     components: {
@@ -25,20 +25,20 @@
       return {
         twitter: {},
         github: {}
-      }
+      };
     },
     mounted: function() {
-      this.fetch()
+      this.fetch();
     },
     methods: {
       fetch: function() {
         axios.get('/api/v1/oauth').then(res => {
           for (let identity of res.data) {
-            if (identity.provider == 'twitter') this.twitter = identity
-            if (identity.provider == 'github')  this.github = identity
+            if (identity.provider == 'twitter') this.twitter = identity;
+            if (identity.provider == 'github')  this.github = identity;
           }
-        })
+        });
       }
     }
-  }
+  };
 </script>

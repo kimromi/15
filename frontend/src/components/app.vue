@@ -12,5 +12,5 @@
     components: {
       app_header: Header
     }
-  }
+  };
 </script>

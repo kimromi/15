@@ -1,0 +1,6 @@
+app/
+node_modules/
+public/
+spec/
+vendor/
+frontend/webpack*.config.js

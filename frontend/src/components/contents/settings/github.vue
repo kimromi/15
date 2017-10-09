@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from 'axios';
 
   export default {
     props: [
@@ -32,12 +32,12 @@
         return this.authorized() ? `https://github.com/${this.identity.nickname}` : '';
       },
       disconnect: function() {
-        axios.delete('/api/v1/oauth/github').then(res => {
-          this.identity = {}
-        })
+        axios.delete('/api/v1/oauth/github').then(() => {
+          this.identity = {};
+        });
       }
     }
-  }
+  };
 </script>
 
 <style scoped>
