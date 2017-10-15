@@ -58,6 +58,9 @@ GEM
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    foreman (0.63.0)
+      dotenv (>= 0.7)
+      thor (>= 0.13.6)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.6)
@@ -228,6 +231,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv-rails
+  foreman
   listen (>= 3.0.5, < 3.2)
   octokit
   omniauth-github
