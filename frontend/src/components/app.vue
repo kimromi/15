@@ -1,22 +1,24 @@
 <template>
   <div>
-    <app_header></app_header>
-    <router-view></router-view>
+    <sidebar></sidebar>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-  import Header from './header.vue';
+  import Sidebar from './sidebar.vue';
 
   export default {
     components: {
-      app_header: Header
+      sidebar: Sidebar
     }
   };
 </script>
 
 <style>
-  [v-cloak] {
-    display: none;
+  .content {
+    padding: 30px 30px 0 230px;
   }
 </style>

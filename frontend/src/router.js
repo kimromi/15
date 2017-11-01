@@ -4,13 +4,15 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import App from './components/app.vue';
-import Settings from './components/contents/settings.vue';
+import Team from './components/contents/team.vue';
+import Me from './components/contents/me.vue';
 
 const router = new VueRouter({
   routes: [
     {
       path: '/', component: App, children: [
-        { path: 'settings', component: Settings }
+        { path: 'team', component: Team },
+        { path: 'members/me', component: Me },
       ]
     }
   ]
