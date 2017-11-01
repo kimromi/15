@@ -1,12 +1,10 @@
 <template>
   <div class="container">
     <h1>Settings</h1>
-    <ul class="collection">
-      <twitter :identity="twitter"></twitter>
-      <github :identity="github"></github>
-    </ul>
-    <a class="btn-large btn-block" href="/signout">
-      Sign out <i class="material-icons fa fa-sign-out fa-2x"></i>
+    <twitter :identity="twitter"></twitter>
+    <github :identity="github"></github>
+    <a class="btn btn-default btn-lg btn-block" href="/signout">
+      Sign out <i class="fa fa-sign-out"></i>
     </a>
   </div>
 </template>

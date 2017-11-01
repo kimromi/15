@@ -1,23 +1,26 @@
 <template>
-  <div>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="/app" class="brand-logo">fifteen</a>
-        <ul class="right hide-on-med-and-down">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">Fifteen</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <router-link to="/">
-              <i class="material-icons fa fa-pencil-square-o fa-2x"></i>
+              <i class="fa fa-pencil-square-o"></i>
             </router-link>
           </li>
           <li>
             <router-link to="/settings">
-              <i class="material-icons fa fa-cog fa-2x"></i>
+              <i class="fa fa-cog"></i>
             </router-link>
           </li>
         </ul>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>

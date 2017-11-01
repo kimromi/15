@@ -1,11 +1,11 @@
 .container.top
   .row
-    .col.s12.m8
+    .col-xs-12.col-sm-8
       h1 fifteen
-    .col.s12.m4
-        = link_to '/auth/twitter', class: 'btn btn-block btn-twitter'
-          i.fa.fa-twitter.material-icons.left
-          | Twitter
-        = link_to '/auth/github', class: 'btn btn-block btn-github'
-          i.fa.fa-github.material-icons.left
-          | GitHub
+    .col-xs-12.col-sm-4
+      = link_to '/auth/twitter', class: 'btn btn-block btn-lg btn-default btn-twitter'
+        i.fa.fa-twitter
+        | Twitter
+      = link_to '/auth/github', class: 'btn btn-block btn-lg btn-default btn-github'
+        i.fa.fa-github
+        | GitHub
