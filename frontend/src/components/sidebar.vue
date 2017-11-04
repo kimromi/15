@@ -3,7 +3,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top sidebar-wrapper" role="navigation">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <img src="/assets/15-logo.png"/>
+          <router-link to="/">
+            <img src="/assets/15-logo.png"/>
+          </router-link>
         </li>
         <li>
           <router-link to="/">
@@ -11,7 +13,9 @@
           </router-link>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> Settings <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-cog"></i> Settings <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu" role="menu">
             <li>
               <router-link to="/team">
@@ -61,14 +65,16 @@
       list-style: none;
 
       .sidebar-brand {
-        padding: 25px 15px 10px 30px;
+        padding-top: 15px;
         height: 100px;
         font-size: 20px;
         line-height: 44px;
         color: #FFF;
 
-        img {
+        a {
+          img {
             width: 80px;
+          }
         }
       }
 
