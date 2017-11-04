@@ -3,9 +3,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top sidebar-wrapper" role="navigation">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <router-link to="/">
-            <img src="/assets/15-logo.png"/>
-          </router-link>
+          <img src="/assets/15-logo.png"/>
         </li>
         <li>
           <router-link to="/">
@@ -65,16 +63,14 @@
       list-style: none;
 
       .sidebar-brand {
-        padding-top: 15px;
+        padding: 25px 15px 10px 30px;
         height: 100px;
         font-size: 20px;
         line-height: 44px;
         color: #FFF;
 
-        a {
-          img {
-            width: 80px;
-          }
+        img {
+          width: 80px;
         }
       }
 
