@@ -6,17 +6,20 @@
       <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
     </h1>
 
+    <time_schedule></time_schedule>
     <percentage></percentage>
   </div>
 </template>
 
 <script>
+  import TimeSchedule from './daily/time_schedule.vue';
   import Percentage from './daily/percentage.vue';
   import Date from '../../lib/date'
 
   export default {
     components: {
-      percentage: Percentage
+      percentage: Percentage,
+      time_schedule: TimeSchedule
     },
     data: function() {
       return {
