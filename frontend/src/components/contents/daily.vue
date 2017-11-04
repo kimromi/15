@@ -5,13 +5,19 @@
       {{ date }} <span class="day">{{ day }}</span>
       <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
     </h1>
+
+    <percentage></percentage>
   </div>
 </template>
 
 <script>
+  import Percentage from './daily/percentage.vue';
   import Date from '../../lib/date'
 
   export default {
+    components: {
+      percentage: Percentage
+    },
     data: function() {
       return {
         date: null,
