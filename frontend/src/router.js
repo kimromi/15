@@ -12,10 +12,10 @@ const router = new VueRouter({
   routes: [
     {
       path: '/', component: App, children: [
-        { path: '', component: Daily, name: 'today' },
-        { path: ':date', component: Daily, name: 'daily' },
         { path: 'team', component: Team },
         { path: 'members/me', component: Me },
+        { path: '', component: Daily, name: 'today' },
+        { path: ':date', component: Daily, name: 'daily' },
       ]
     }
   ]

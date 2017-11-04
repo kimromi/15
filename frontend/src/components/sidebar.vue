@@ -7,7 +7,7 @@
         </li>
         <li>
           <router-link to="/">
-            <i class="fa fa-pencil-square-o"></i> Edit
+            <i class="fa fa-calendar"></i> Today
           </router-link>
         </li>
         <li class="dropdown">

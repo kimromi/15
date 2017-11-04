@@ -1,0 +1,54 @@
+<template>
+  <div class="daily">
+    <h1>
+      <router-link :to="beforeDate"><i class="fa fa-caret-left"></i></router-link>
+      {{ date }} <span class="day">{{ day }}</span>
+      <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
+    </h1>
+  </div>
+</template>
+
+<script>
+  import Date from '../../lib/date'
+
+  export default {
+    data: function() {
+      return {
+        date: null,
+        day: null,
+        beforeDate: null,
+        nextDate: null,
+      }
+    },
+    watch: {
+      '$route': 'routeChanged'
+    },
+    created() {
+      this.routeChanged();
+    },
+    methods: {
+      routeChanged() {
+        this.date = this.$route.params.date || Date.today();
+        this.day = Date.day(this.date);
+        this.beforeDate = Date.beforeDay(this.date);
+        this.nextDate = Date.nextDay(this.date);
+      }
+    }
+  };
+</script>
+
+<style lang="scss">
+  h1 {
+    .day {
+      font-size: 60%;
+      font-weight: normal;
+    }
+
+    a {
+      color: gray;
+      &:hover, &:active, &:focus {
+        color: gray;
+      }
+    }
+  }
+</style>
