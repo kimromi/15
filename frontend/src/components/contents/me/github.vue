@@ -33,7 +33,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .github {
     color: #FFF;
     background-color: #333 !important;

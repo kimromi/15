@@ -38,7 +38,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .twitter {
     color: #FFF;
     background-color: #00aced !important;

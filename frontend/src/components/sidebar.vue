@@ -39,16 +39,11 @@
   export default {};
 </script>
 
-<style>
-/*-------------------------------*/
-/*           Wrappers            */
-/*-------------------------------*/
-
+<style lang="scss">
 .wrapper {
-    padding-left: 0;
-}
+  padding-left: 0;
 
-.sidebar-wrapper {
+  .sidebar-wrapper {
     left: 200px;
     width: 200px;
     height: 100%;
@@ -56,66 +51,68 @@
     overflow-y: auto;
     overflow-x: hidden;
     background: #1a1a1a;
-}
 
-/*-------------------------------*/
-/*     Sidebar nav styles        */
-/*-------------------------------*/
+    .sidebar-nav {
+      position: absolute;
+      top: 0;
+      width: 200px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
 
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 200px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+      .sidebar-brand {
+        padding: 25px 15px 10px 30px;
+        height: 100px;
+        font-size: 20px;
+        line-height: 44px;
+        color: #FFF;
 
-.sidebar-nav > .sidebar-brand {
-    padding: 25px 15px 10px 30px;
-    height: 100px;
-    font-size: 20px;
-    line-height: 44px;
-    color: #FFF;
-}
+        img {
+            width: 80px;
+        }
+      }
 
-.sidebar-nav > .sidebar-brand img {
-    width: 80px;
-}
+      li {
+        position: relative;
+        line-height: 20px;
+        display: inline-block;
+        width: 100%;
 
-.sidebar-nav li {
-    position: relative;
-    line-height: 20px;
-    display: inline-block;
-    width: 100%;
-}
+        a {
+          display: block;
+          color: #BBB;
+          text-decoration: none;
+          padding: 10px 15px 10px 30px;
 
-.sidebar-nav li a {
-    display: block;
-    color: #BBB;
-    text-decoration: none;
-    padding: 10px 15px 10px 30px;
-}
+          &:hover, &:active, &:focus {
+            color: #FFF;
+            text-decoration: none;
+            background-color: #1A1A1A;
+          }
+        }
+      }
 
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus{
-    color: #FFF;
-    text-decoration: none;
-    background-color: #1A1A1A;
-}
+      li.open {
+        a {
+          &:hover, &:active, &:focus {
+            color: #FFF;
+            text-decoration: none;
+            background-color: #1A1A1A;
+          }
+        }
+      }
 
-.sidebar-nav .dropdown-menu {
-    position: relative;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    background-color: #222;
-    box-shadow: none;
+      .dropdown-menu {
+          position: relative;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border-radius: 0;
+          border: none;
+          background-color: #222;
+          box-shadow: none;
+      }
+    }
+  }
 }
 </style>

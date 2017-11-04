@@ -17,7 +17,7 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   .content {
     padding: 30px 30px 0 230px;
   }
