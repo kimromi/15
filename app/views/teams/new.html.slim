@@ -1,0 +1,23 @@
+.container.team
+  .row
+    .col-xs-12.col-sm-4
+      img src="#{asset_path '15-logo-black.png'}"
+    .col-xs-12.col-sm-8
+      - if @team.errors.any?
+        ul
+          - @team.errors.full_messages.each do |msg|
+            li = msg
+      = form_for @team do |f|
+        .form-group
+          .form-inline
+            = f.label :name, 'https://fifteen.tech/'
+            = f.text_field :name, class: 'form-control'
+            input.form-control.btn-success type="submit" value="create"
+      - if @teams
+        h2 teams
+        ul
+          - @teams.each do |team|
+            li
+              = link_to team.name, "/#{team.name}"
+      - else
+        = link_to 'login', new_session_path

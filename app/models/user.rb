@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :members
+  has_many :teams, through: :members
   has_many :identities
 
   Identity.providers.each do |provider, index|

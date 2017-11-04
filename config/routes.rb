@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root 'app#index'
+  root 'teams#new'
+  resources :teams, only: %i(new create)
+  resources :sessions, only: %i(new create)
+
   get 'app/index'
 
   get '/auth/:provider/callback', to: 'sessions#create'
@@ -12,4 +15,6 @@ Rails.application.routes.draw do
       delete '/oauth/:provider', to: 'oauth#delete'
     end
   end
+
+  get '/:team', to: 'app#index'
 end

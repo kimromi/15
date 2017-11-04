@@ -1,5 +1,9 @@
 class AppController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    render template: 'app/welcome' unless signed_in?
+    if current_user.teams.where(name: params[:team]).empty?
+      redirect_to root_path
+    end
   end
 end
