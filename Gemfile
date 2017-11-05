@@ -13,6 +13,9 @@ gem 'dotenv-rails'
 gem 'slim-rails'
 gem 'sass-rails'
 
+# JWT authorization
+gem 'knock'
+
 # omniauth
 gem 'omniauth-twitter'
 gem 'omniauth-github'
