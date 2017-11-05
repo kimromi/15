@@ -1,4 +1,4 @@
-class Api::V1::OauthController < ApplicationController
+class Api::V1::OauthController < Api::V1::ApplicationController
   before_action :authenticate_user!
   protect_from_forgery except: :delete
 

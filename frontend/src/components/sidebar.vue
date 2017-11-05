@@ -5,6 +5,18 @@
         <li class="sidebar-brand">
           <img src="/assets/15-logo.png"/>
         </li>
+        <li class="sidebar-teams">
+          <div v-if="teams.length == 0" class="wait">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+          <div v-else>
+            <select class="form-control" v-model="selectedTeam" @change="teamChange">
+              <option v-for="(team, index) in teams" :value="team.name">
+                {{ team.name }}
+              </option>
+            </select>
+          </div>
+        </li>
         <li>
           <router-link to="/">
             <i class="fa fa-calendar"></i> Today
@@ -38,7 +50,36 @@
 </template>
 
 <script>
-  export default {};
+  import Api from '../lib/api';
+  import axios from 'axios';
+
+  export default {
+    mounted: function() {
+      this.fetchTeams()
+    },
+    data: function() {
+      return {
+        teams: [],
+        currentTeam: {},
+        selectedTeam: null
+      }
+    },
+    methods: {
+      fetchTeams: async function() {
+        Promise.all([
+          Api.currentTeam(),
+          Api.teams(),
+        ]).then(([resCurrentTeam, resTeams]) => {
+          this.currentTeam = resCurrentTeam.data;
+          this.selectedTeam = this.currentTeam.name;
+          this.teams = resTeams.data;
+        });
+      },
+      teamChange: function() {
+        location.href= `/${this.selectedTeam}#${this.$route.path}`
+      }
+    }
+  };
 </script>
 
 <style lang="scss">
@@ -63,14 +104,24 @@
       list-style: none;
 
       .sidebar-brand {
-        padding: 25px 15px 10px 30px;
-        height: 100px;
+        padding: 25px 15px 25px 30px;
+        height: 110px;
         font-size: 20px;
         line-height: 44px;
         color: #FFF;
 
         img {
           width: 80px;
+        }
+      }
+
+      .sidebar-teams {
+        padding: 0px 15px 10px 15px;
+
+        .wait {
+          text-align: center;
+          font-size: 14px;
+          line-height: 34px;
         }
       }
 
