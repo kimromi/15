@@ -11,7 +11,7 @@
           </div>
           <div v-else>
             <select class="form-control" v-model="selectedTeam" @change="teamChange">
-              <option v-for="(team, index) in teams" :value="team.name">
+              <option v-for="team in teams" :value="team.name">
                 {{ team.name }}
               </option>
             </select>

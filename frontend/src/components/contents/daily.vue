@@ -1,13 +1,16 @@
 <template>
   <div class="daily">
-    <h1>
-      <router-link :to="beforeDate"><i class="fa fa-caret-left"></i></router-link>
-      {{ date }} <span class="day">{{ day }}</span>
-      <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
-    </h1>
+    <div class="daily-header">
+      <h1>
+        <router-link :to="beforeDate"><i class="fa fa-caret-left"></i></router-link>
+        {{ date }} <span class="day">{{ day }}</span>
+        <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
+      </h1>
+
+      <percentage></percentage>
+    </div>
 
     <time_schedule></time_schedule>
-    <percentage></percentage>
   </div>
 </template>
 
@@ -47,16 +50,29 @@
 </script>
 
 <style lang="scss">
-  h1 {
-    .day {
-      font-size: 60%;
-      font-weight: normal;
+  .daily {
+    height: 100%;
+
+    .daily-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 30px 0 230px;
+      width: 100%;
+      height: 100px;
     }
 
-    a {
-      color: gray;
-      &:hover, &:active, &:focus {
+    h1 {
+      .day {
+        font-size: 60%;
+        font-weight: normal;
+      }
+
+      a {
         color: gray;
+        &:hover, &:active, &:focus {
+          color: gray;
+        }
       }
     }
   }

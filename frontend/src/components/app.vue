@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <sidebar></sidebar>
     <div class="content">
       <router-view></router-view>
@@ -18,7 +18,12 @@
 </script>
 
 <style lang="scss">
-  .content {
-    padding: 30px 30px 0 230px;
+  .app {
+    height: 100%;
+
+    .content {
+      height: 100%;
+      padding: 30px 30px 0 230px;
+    }
   }
 </style>
