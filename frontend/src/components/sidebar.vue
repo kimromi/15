@@ -9,6 +9,9 @@
           <div v-if="teams.length == 0" class="wait">
             <i class="fa fa-spinner fa-spin"></i>
           </div>
+          <div v-else-if="teams.length == 1" class="one-team">
+            {{ teams[0].name }}
+          </div>
           <div v-else>
             <select class="form-control" v-model="selectedTeam" @change="teamChange">
               <option v-for="team in teams" :value="team.name">
@@ -104,7 +107,8 @@
       list-style: none;
 
       .sidebar-brand {
-        padding: 25px 15px 25px 30px;
+        text-align: center;
+        padding: 25px 0px;
         height: 110px;
         font-size: 20px;
         line-height: 44px;
@@ -123,6 +127,17 @@
           font-size: 14px;
           line-height: 34px;
         }
+
+        .one-team {
+          text-align: center;
+          padding: 5px 0;
+          font-size: 18px;
+          line-height: 34px;
+          color: #FFF;
+          border-bottom: 1px solid #EEE;
+          text-transform: uppercase;
+        }
+
       }
 
       li {
