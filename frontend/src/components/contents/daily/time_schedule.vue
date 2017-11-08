@@ -46,7 +46,7 @@
 <style lang="scss">
   .time_schedule {
     height: 100%;
-    padding: 80px 0 30px 0;
+    padding: 110px 0 30px 0;
 
     > div {
       height: 100%;

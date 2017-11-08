@@ -23,7 +23,7 @@
 
     .content {
       height: 100%;
-      padding: 30px 30px 0 230px;
+      padding: 0 30px 0 230px;
     }
   }
 </style>

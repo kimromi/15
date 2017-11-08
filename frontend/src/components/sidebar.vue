@@ -25,6 +25,11 @@
             <i class="fa fa-calendar"></i> Today
           </router-link>
         </li>
+        <li>
+          <router-link to="/tasks">
+            <i class="fa fa-check-square-o"></i> Tasks
+          </router-link>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-cog"></i> Settings <span class="caret"></span>
@@ -53,11 +58,11 @@
 </template>
 
 <script>
-  import Api from '../lib/api';
-  import axios from 'axios';
+  import ApiClient from '../lib/api_client';
 
   export default {
     mounted: function() {
+      this.fetchCurrentTeam()
       this.fetchTeams()
     },
     data: function() {
@@ -68,15 +73,18 @@
       }
     },
     methods: {
+      fetchCurrentTeam: async function() {
+        const { data, error } = await ApiClient.currentTeam();
+        if (!error) {
+          this.currentTeam = data;
+          this.selectedTeam = data.name;
+        }
+      },
       fetchTeams: async function() {
-        Promise.all([
-          Api.currentTeam(),
-          Api.teams(),
-        ]).then(([resCurrentTeam, resTeams]) => {
-          this.currentTeam = resCurrentTeam.data;
-          this.selectedTeam = this.currentTeam.name;
-          this.teams = resTeams.data;
-        });
+        const { data, error } = await ApiClient.teams();
+        if (!error) {
+          this.teams = data;
+        }
       },
       teamChange: function() {
         location.href= `/${this.selectedTeam}#${this.$route.path}`

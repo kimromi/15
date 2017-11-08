@@ -6,6 +6,6 @@ class Api::V1::TeamController < Api::V1::ApplicationController
   end
 
   def show
-    render json: @team
+    render json: current_team
   end
 end
