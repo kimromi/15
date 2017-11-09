@@ -1,2 +1,2 @@
 web: bundle exec rails server
-js_watch: yarn watch
+js_watch: npm run watch
