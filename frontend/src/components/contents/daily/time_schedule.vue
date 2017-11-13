@@ -4,40 +4,91 @@
       <table class="time-table table">
         <tr v-for="hour in hours">
           <td class="hour">{{ hour }} </td>
-          <td v-for="minute in minutes" class="enter yet" :id="hour + ':' + minute" @click="select(hour, minute)">
-            {{ minute | forDisplay }}-{{ minute + 15 | forDisplay }} <i class="fa fa-caret-down"></i>
+          <td v-for="minute in minutes" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
+            <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute]['name'] }}</span>
+            <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
           </td>
         </tr>
       </table>
     </div>
     <div class="col-xs-12 col-sm-4 enter-area">
-      <h2>{{ selected }}</h2>
+      <ul class="list-group tasks">
+        <li class="list-group-item task" v-for="task in tasks" @click="record(task)">
+          {{ task.name }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import _ from 'underscore';
+  import ApiClient from '../../../lib/api_client'
 
   export default {
     data: function() {
       return {
         hours: _.range(0, 24),
-        minutes: [0, 15, 30, 45],
-        selected: null
+        minutes: ['00', '15', '30', '45'],
+        records: {
+          '0:00': {name: 'test1'},
+          '0:15': {name: 'test2'},
+          '0:30': null,
+          '0:45': null,
+          '1:00': null,
+          '1:15': null,
+          '1:30': null,
+          '1:45': null,
+        },
+        selected: null,
+        tasks: []
       }
     },
-    filters: {
-      forDisplay: function(minute) {
-        if (minute == "0" || minute == "60") return "00";
-        return minute;
-      }
+    computed: {
+      ...mapGetters(['date'])
+    },
+    created: function() {
+      this.initialize();
+      this.dateChanged();
+    },
+    watch: {
+      date: 'dateChanged'
     },
     methods: {
+      initialize: function() {
+        this.fetchTasks();
+      },
+      dateChanged: function() {
+        this.fetchRecords();
+      },
+      fetchTasks: async function() {
+        const { tasks, error } = await ApiClient.tasks();
+        if (!error) {
+          this.tasks = tasks;
+        } else {
+          this.error = error.message
+        }
+      },
+      fetchRecords: async function() {
+        const { records, error } = await ApiClient.records(this.date);
+        if (!error) {
+          //this.records = records;
+        } else {
+          this.error = error.message
+        }
+      },
       select: function(hour, minute) {
-        const start = `${hour}:${this.$options.filters.forDisplay(minute)}`;
-        const end = minute == '45' ? `${hour+1}:00` : `${hour}:${this.$options.filters.forDisplay(minute+15)}`;
-        this.selected = `${start}-${end}`;
+        this.selected = `${hour}:${minute}`;
+      },
+      isActive: function(hour, minute) {
+        return this.selected == `${hour}:${minute}`
+      },
+      record: async function(task) {
+        if (this.selected) {
+          this.records[this.selected] = task;
+          const { data, error } = await ApiClient.createRecord(this.date, this.selected, task.name);
+        }
       }
     }
   };
@@ -78,8 +129,16 @@
           color: #CCC;
           border: 1px dotted #BBB;
         }
-        td.complete {
-          border: 1px solid #000;
+        td.active {
+          color: #FFF;
+          background-color: #333;
+          border: 1px solid #333;
+        }
+        td.recorded {
+          color: #000;
+          background-color: #DDD;
+          border: 1px solid #CCC;
+          font-weight: bold;
         }
       }
     }
@@ -90,6 +149,10 @@
       h2 {
         margin: 0;
       }
+    }
+
+    .task {
+      cursor: pointer;
     }
   }
 </style>

@@ -11,9 +11,13 @@ Rails.application.routes.draw do
 
   namespace :api, { format: :json } do
     namespace :v1 do
+      get '/records/:date', to: 'records#index'
+      resources :records, only: %i(create)
+
       get :teams, to: 'team#index'
       get :team, to: 'team#show'
       resources :tasks, only: %i(index create destroy)
+      get :teams, to: 'team#index'
       get :oauth, to: 'oauth#index'
       delete '/oauth/:provider', to: 'oauth#delete'
     end

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import TimeSchedule from './daily/time_schedule.vue';
   import Percentage from './daily/percentage.vue';
   import Date from '../../lib/date'
@@ -39,12 +40,16 @@
       this.routeChanged();
     },
     methods: {
+      ...mapActions([
+        'changeDate'
+      ]),
       routeChanged() {
         this.date = this.$route.params.date || Date.today();
+        this.changeDate(this.date);
         this.day = Date.day(this.date);
         this.beforeDate = Date.beforeDay(this.date);
         this.nextDate = Date.nextDay(this.date);
-      }
+      },
     }
   };
 </script>

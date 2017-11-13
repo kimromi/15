@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   has_many :members
   has_many :tasks
+  has_many :records
 
   validates :name,
     presence: true,

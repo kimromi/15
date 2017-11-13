@@ -74,16 +74,16 @@
     },
     methods: {
       fetchCurrentTeam: async function() {
-        const { data, error } = await ApiClient.currentTeam();
+        const { currentTeam, error } = await ApiClient.currentTeam();
         if (!error) {
-          this.currentTeam = data;
-          this.selectedTeam = data.name;
+          this.currentTeam = currentTeam;
+          this.selectedTeam = currentTeam.name;
         }
       },
       fetchTeams: async function() {
-        const { data, error } = await ApiClient.teams();
+        const { teams, error } = await ApiClient.teams();
         if (!error) {
-          this.teams = data;
+          this.teams = teams;
         }
       },
       teamChange: function() {

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.join(__dirname, './src/fifteen.js'),
+  entry: ["babel-polyfill", path.join(__dirname, './src/fifteen.js')],
   output: {
     filename: 'fifteen.js',
     path: path.join(__dirname, '../app/assets/javascripts')
