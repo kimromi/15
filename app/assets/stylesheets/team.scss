@@ -1,7 +1,21 @@
 .team {
   margin-top: 50px;
 
+  .logo {
+    margin-bottom: 30px;
+  }
+
   .error {
     color: red;
+  }
+
+  .btn {
+    margin-top: 15px;
+    text-transform: none;
+    color: #FFF;
+  }
+
+  .btn-github {
+    background-color: #333;
   }
 }

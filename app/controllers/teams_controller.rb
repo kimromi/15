@@ -1,9 +1,8 @@
 class TeamsController < ApplicationController
+  before_action :fetch_teams
+
   def new
     @team = Team.new
-    if signed_in?
-      @teams = current_user.teams
-    end
   end
 
   def create
@@ -23,6 +22,10 @@ class TeamsController < ApplicationController
   end
 
   private
+
+  def fetch_teams
+    @teams = current_user.teams if signed_in?
+  end
 
   def create_params
     params.require(:team).permit(:name)

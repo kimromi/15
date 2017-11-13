@@ -1,23 +1,31 @@
 .container.team
   .row
-    .col-xs-12.col-sm-4
+    .col-xs-12.text-center.logo
       img src="#{asset_path '15-logo-black.png'}"
-    .col-xs-12.col-sm-8
-      - if @team.errors.any?
-        ul
-          - @team.errors.full_messages.each do |msg|
-            li = msg
-      = form_for @team do |f|
-        .form-group
-          .form-inline
-            = f.label :name, 'https://fifteen.tech/'
-            = f.text_field :name, class: 'form-control'
-            input.form-control.btn-success type="submit" value="create"
-      - if @teams
-        h2 teams
-        ul
-          - @teams.each do |team|
-            li
-              = link_to team.name, "/#{team.name}"
+    .col-xs-12
+      - if signed_in?
+        .row
+          .col-xs-12.col-sm-5
+            h2 Create Team
+            = form_for @team do |f|
+              .form-group
+                .form-inline
+                  = f.label :name, root_url(only_path: false)
+                  = f.text_field :name, class: 'form-control', placeholder: 'Input Team Name'
+                  input.form-control.btn-success type="submit" value="create"
+            - if @team.errors.any?
+              ul
+              - @team.errors.full_messages.each do |msg|
+                li = msg
+          .col-xs-12.col-sm-7
+            h2 teams
+            - if @teams.present?
+              .list-group
+                - @teams.each do |team|
+                  = link_to team.name, "/#{team.name}", class: 'list-group-item list-group-item-action list-group-item-primary'
       - else
-        = link_to 'login', new_session_path
+        .row
+          .col-xs-12.col-sm-6.col-sm-offset-3
+            = link_to '/auth/github', class: 'btn btn-block btn-lg btn-default btn-github'
+              i.fa.fa-github
+              | &nbsp; Sign in with GitHub
