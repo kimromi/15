@@ -2,7 +2,9 @@
   <div class="app">
     <sidebar></sidebar>
     <div class="content">
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -24,6 +26,13 @@
     .content {
       height: 100%;
       padding: 0 30px 0 230px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 0.2s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
     }
   }
 </style>

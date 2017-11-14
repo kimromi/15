@@ -21,7 +21,7 @@
           </div>
         </li>
         <li>
-          <router-link to="/">
+          <router-link to="/daily">
             <i class="fa fa-calendar"></i> Today
           </router-link>
         </li>

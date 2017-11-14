@@ -1,22 +1,32 @@
 <template>
-  <div class="row time_schedule">
-    <div class="col-xs-12 col-sm-8">
-      <table class="time-table table">
-        <tr v-for="hour in hours">
-          <td class="hour">{{ hour }} </td>
-          <td v-for="minute in minutes" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
-            <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute]['name'] }}</span>
-            <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
-          </td>
-        </tr>
-      </table>
+  <div class="time-schedule">
+    <div class="percentage">
+      <div class="progress">
+        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
+        <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
+        <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-4 enter-area">
-      <ul class="list-group tasks">
-        <li class="list-group-item task" v-for="task in tasks" @click="record(task)">
-          {{ task.name }}
-        </li>
-      </ul>
+
+    <div class="row time-table">
+      <div class="table-area col-xs-12 col-sm-8">
+        <table class="table">
+          <tr v-for="hour in hours">
+            <td class="hour">{{ hour }} </td>
+            <td v-for="minute in minutes" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
+              <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute]['name'] }}</span>
+              <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="enter-area col-xs-12 col-sm-4">
+        <ul class="list-group tasks">
+          <li class="list-group-item task" v-for="task in tasks" @click="record(task)">
+            {{ task.name }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -95,50 +105,61 @@
 </script>
 
 <style lang="scss">
-  .time_schedule {
+  .time-schedule {
     height: 100%;
     padding: 110px 0 30px 0;
 
-    > div {
-      height: 100%;
-      padding: 0;
-      overflow-y: auto;
+    .percentage {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      padding: 0 30px 0 230px;
+      width: 100%;
     }
 
     .time-table {
-      width: 100%;
+      height: 100%;
+      overflow-y: auto;
 
-      tr {
-        td {
-          padding: 5px;
-          font-size: 13px;
-          cursor: pointer;
-        }
+      .table-area {
+        padding: 0;
 
-        td.hour {
-          width: 4%;
-          text-align: right;
-        }
+        table {
+          width: 100%;
 
-        td.enter {
-          width: 24%;
-          text-align: center;
-        }
+          tr {
+            td {
+              padding: 5px;
+              font-size: 13px;
+              cursor: pointer;
+            }
 
-        td.yet {
-          color: #CCC;
-          border: 1px dotted #BBB;
-        }
-        td.active {
-          color: #FFF;
-          background-color: #333;
-          border: 1px solid #333;
-        }
-        td.recorded {
-          color: #000;
-          background-color: #DDD;
-          border: 1px solid #CCC;
-          font-weight: bold;
+            td.hour {
+              width: 4%;
+              text-align: right;
+            }
+
+            td.enter {
+              width: 24%;
+              text-align: center;
+            }
+
+            td.yet {
+              color: #CCC;
+              border: 1px dotted #BBB;
+            }
+            td.active {
+              color: #FFF;
+              background-color: #333;
+              border: 1px solid #333;
+            }
+            td.recorded {
+              color: #000;
+              background-color: #DDD;
+              border: 1px solid #CCC;
+              font-weight: bold;
+            }
+          }
         }
       }
     }

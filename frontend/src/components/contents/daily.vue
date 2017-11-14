@@ -6,25 +6,20 @@
         {{ date }} <span class="day">{{ day }}</span>
         <router-link :to="nextDate"><i class="fa fa-caret-right"></i></router-link>
       </h1>
-
-      <percentage></percentage>
     </div>
 
-    <time_schedule></time_schedule>
+    <transition name="fade" mode="out-in">
+      <router-view :key="$route.params.date"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
   import { mapActions } from 'vuex'
   import TimeSchedule from './daily/time_schedule.vue';
-  import Percentage from './daily/percentage.vue';
   import Date from '../../lib/date'
 
   export default {
-    components: {
-      percentage: Percentage,
-      time_schedule: TimeSchedule
-    },
     data: function() {
       return {
         date: null,
@@ -64,7 +59,7 @@
       left: 0;
       padding: 0 30px 0 230px;
       width: 100%;
-      height: 100px;
+      height: 70px;
     }
 
     h1 {
@@ -79,6 +74,13 @@
           color: gray;
         }
       }
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 0.2s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
     }
   }
 </style>

@@ -4,10 +4,14 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import App from './components/app.vue';
-import Daily from './components/contents/daily.vue';
 import Tasks from './components/contents/tasks.vue';
 import Team from './components/contents/team.vue';
 import Me from './components/contents/me.vue';
+
+import Daily from './components/contents/daily.vue';
+import TimeSchedule from './components/contents/daily/time_schedule.vue';
+
+import Date from './lib/date';
 
 const router = new VueRouter({
   routes: [
@@ -16,8 +20,10 @@ const router = new VueRouter({
         { path: 'tasks', component: Tasks },
         { path: 'team', component: Team },
         { path: 'members/me', component: Me },
-        { path: '', component: Daily, name: 'today' },
-        { path: ':date', component: Daily, name: 'daily' },
+        { path: 'daily', component: Daily, children: [
+          { path: '', redirect: Date.today() },
+          { path: ':date', component: TimeSchedule, name: 'daily' },
+        ]},
       ]
     }
   ]
