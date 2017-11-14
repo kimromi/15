@@ -20,6 +20,7 @@ const router = new VueRouter({
         { path: 'tasks', component: Tasks },
         { path: 'team', component: Team },
         { path: 'members/me', component: Me },
+        { path: '', redirect: '/daily' },
         { path: 'daily', component: Daily, children: [
           { path: '', redirect: Date.today() },
           { path: ':date', component: TimeSchedule, name: 'daily' },
