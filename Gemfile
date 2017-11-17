@@ -13,6 +13,7 @@ gem 'puma', '~> 3.7'
 gem 'dotenv-rails'
 gem 'slim-rails'
 gem 'sass-rails'
+gem "active_model_serializers"
 
 # JWT authorization
 gem 'knock'
