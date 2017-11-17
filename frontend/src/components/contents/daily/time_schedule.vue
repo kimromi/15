@@ -14,7 +14,7 @@
           <tr v-for="hour in hours">
             <td class="hour">{{ hour }} </td>
             <td v-for="minute in minutes" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
-              <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute]['name'] }}</span>
+              <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute].task_name }}</span>
               <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
             </td>
           </tr>
@@ -41,16 +41,7 @@
       return {
         hours: _.range(0, 24),
         minutes: ['00', '15', '30', '45'],
-        records: {
-          '0:00': {name: 'test1'},
-          '0:15': {name: 'test2'},
-          '0:30': null,
-          '0:45': null,
-          '1:00': null,
-          '1:15': null,
-          '1:30': null,
-          '1:45': null,
-        },
+        records: {},
         selected: null,
         tasks: []
       }
@@ -69,8 +60,8 @@
       initialize: function() {
         this.fetchTasks();
       },
-      dateChanged: function() {
-        this.fetchRecords();
+      dateChanged: async function() {
+        await this.fetchRecords();
       },
       fetchTasks: async function() {
         const { tasks, error } = await ApiClient.tasks();
@@ -83,7 +74,9 @@
       fetchRecords: async function() {
         const { records, error } = await ApiClient.records(this.date);
         if (!error) {
-          //this.records = records;
+          for (const record of records) {
+            this.records = Object.assign({}, this.records, { [record.time]: record })
+          }
         } else {
           this.error = error.message
         }
@@ -96,8 +89,11 @@
       },
       record: async function(task) {
         if (this.selected) {
-          this.records[this.selected] = task;
-          const { data, error } = await ApiClient.createRecord(this.date, this.selected, task.name);
+          this.records = Object.assign({}, this.records, { [this.selected]: {task_name: task.name}})
+          const { error } = await ApiClient.createRecord(this.date, this.selected, task.name);
+          if (error) {
+            this.error = error.message
+          }
         }
       }
     }
