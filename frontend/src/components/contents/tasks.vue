@@ -37,9 +37,9 @@
       }
     },
     created: async function() {
-      let { data, error } = await ApiClient.tasks();
+      let { tasks, error } = await ApiClient.tasks();
       if (!error) {
-        this.tasks = data;
+        this.tasks = tasks;
       } else {
         this.error = error.message
       }

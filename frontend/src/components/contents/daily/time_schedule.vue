@@ -119,10 +119,11 @@
 
     .time-table {
       height: 100%;
-      overflow-y: auto;
 
       .table-area {
         padding: 0;
+        height: 100%;
+        overflow-y: auto;
 
         table {
           width: 100%;
@@ -165,7 +166,8 @@
     }
 
     .enter-area {
-      padding: 0 15px;
+      height: 100%;
+      overflow-y: auto;
 
       h2 {
         margin: 0;
