@@ -11,7 +11,7 @@
     </form>
 
     <ul class="list-group">
-      <li class="list-group-item" v-for="task in tasks">
+      <li class="list-group-item" v-for="task in tasks" :key="task.id">
         <div class="clearfix">
           <div class="pull-left">
             {{ task.name }}
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import ApiClient from '../../lib/api_client'
+  import ApiClient from '../../lib/api_client';
 
   export default {
     data: function() {
@@ -34,38 +34,38 @@
         error: null,
         name: null,
         tasks: []
-      }
+      };
     },
     created: async function() {
       let { tasks, error } = await ApiClient.tasks();
       if (!error) {
         this.tasks = tasks;
       } else {
-        this.error = error.message
+        this.error = error.message;
       }
     },
     methods: {
       add: async function() {
         if (this.name) {
-          const { data, error } = await ApiClient.createTask({name: this.name})
+          const { data, error } = await ApiClient.createTask({name: this.name});
           if (!error) {
             this.tasks.push(data);
             this.name = '';
-            this.error = ''
+            this.error = '';
           } else {
-            this.error = error.message
+            this.error = error.message;
           }
         }
       },
       destroy: async function(id) {
-        const { data, error } = await ApiClient.destroyTask(id)
+        const { error } = await ApiClient.destroyTask(id);
         if (!error) {
           this.tasks.some((task, i) => {
             if (task.id == id) this.tasks.splice(i, 1);
           });
-          this.error = ''
+          this.error = '';
         } else {
-          this.error = error.message
+          this.error = error.message;
         }
       }
     }

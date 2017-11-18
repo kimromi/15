@@ -2,7 +2,7 @@
   "name": "fifteen",
   "private": true,
   "scripts": {
-    "lint": "eslint -f codeframe ./",
+    "lint": "eslint -f codeframe --ext .vue --ext .js frontend/**",
     "watch": "webpack --watch --config frontend/webpack.config.js",
     "build": "webpack --config frontend/webpack.config.js"
   },
@@ -28,6 +28,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.10.0",
+    "eslint-plugin-vue": "^3.14.0",
     "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",
     "vue-loader": "^13.5.0",

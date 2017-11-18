@@ -1,3 +1,3 @@
 class TaskSerializer < ActiveModel::Serializer
-  attributes :order, :name, :background_color
+  attributes :id, :order, :name, :background_color
 end

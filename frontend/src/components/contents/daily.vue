@@ -15,9 +15,8 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import TimeSchedule from './daily/time_schedule.vue';
-  import Date from '../../lib/date'
+  import { mapActions } from 'vuex';
+  import Date from '../../lib/date';
 
   export default {
     data: function() {
@@ -26,7 +25,7 @@
         day: null,
         beforeDate: null,
         nextDate: null,
-      }
+      };
     },
     watch: {
       '$route': 'routeChanged'

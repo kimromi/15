@@ -14,7 +14,7 @@
           </div>
           <div v-else>
             <select class="form-control" v-model="selectedTeam" @change="teamChange">
-              <option v-for="team in teams" :value="team.name">
+              <option v-for="team in teams" :key="team.id" :value="team.name">
                 {{ team.name }}
               </option>
             </select>
@@ -62,15 +62,15 @@
 
   export default {
     mounted: function() {
-      this.fetchCurrentTeam()
-      this.fetchTeams()
+      this.fetchCurrentTeam();
+      this.fetchTeams();
     },
     data: function() {
       return {
         teams: [],
         currentTeam: {},
         selectedTeam: null
-      }
+      };
     },
     methods: {
       fetchCurrentTeam: async function() {
@@ -87,7 +87,7 @@
         }
       },
       teamChange: function() {
-        location.href= `/${this.selectedTeam}#${this.$route.path}`
+        location.href= `/${this.selectedTeam}#${this.$route.path}`;
       }
     }
   };

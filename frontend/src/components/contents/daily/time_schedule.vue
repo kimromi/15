@@ -11,9 +11,9 @@
     <div class="row time-table">
       <div class="table-area col-xs-12 col-sm-8">
         <table class="table">
-          <tr v-for="hour in hours">
+          <tr v-for="hour in hours" :key="hour">
             <td class="hour">{{ hour }} </td>
-            <td v-for="minute in minutes" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
+            <td v-for="minute in minutes" :key="minute" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
               <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute].task_name }}</span>
               <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
             </td>
@@ -22,7 +22,7 @@
       </div>
       <div class="enter-area col-xs-12 col-sm-4">
         <ul class="list-group tasks">
-          <li class="list-group-item task" v-for="task in tasks" @click="record(task)">
+          <li class="list-group-item task" v-for="task in tasks" :key="task.id" @click="record(task)">
             {{ task.name }}
           </li>
         </ul>
@@ -32,9 +32,9 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex';
   import _ from 'underscore';
-  import ApiClient from '../../../lib/api_client'
+  import ApiClient from '../../../lib/api_client';
 
   export default {
     data: function() {
@@ -44,7 +44,7 @@
         records: {},
         selected: null,
         tasks: []
-      }
+      };
     },
     computed: {
       ...mapGetters(['date'])
@@ -68,31 +68,31 @@
         if (!error) {
           this.tasks = tasks;
         } else {
-          this.error = error.message
+          this.error = error.message;
         }
       },
       fetchRecords: async function() {
         const { records, error } = await ApiClient.records(this.date);
         if (!error) {
           for (const record of records) {
-            this.records = Object.assign({}, this.records, { [record.time]: record })
+            this.records = Object.assign({}, this.records, { [record.time]: record });
           }
         } else {
-          this.error = error.message
+          this.error = error.message;
         }
       },
       select: function(hour, minute) {
         this.selected = `${hour}:${minute}`;
       },
       isActive: function(hour, minute) {
-        return this.selected == `${hour}:${minute}`
+        return this.selected == `${hour}:${minute}`;
       },
       record: async function(task) {
         if (this.selected) {
-          this.records = Object.assign({}, this.records, { [this.selected]: {task_name: task.name}})
+          this.records = Object.assign({}, this.records, { [this.selected]: {task_name: task.name}});
           const { error } = await ApiClient.createRecord(this.date, this.selected, task.name);
           if (error) {
-            this.error = error.message
+            this.error = error.message;
           }
         }
       }
