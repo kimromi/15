@@ -29,6 +29,10 @@ export default class ApiClient {
     return this.format(await this.client().post('api/v1/tasks', {task: params}));
   }
 
+  static async updateTask(id, params) {
+    return this.format(await this.client().patch(`api/v1/tasks/${id}`, {task: params}));
+  }
+
   static async destroyTask(id) {
     return this.format(await this.client().delete(`api/v1/tasks/${id}`));
   }
