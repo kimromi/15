@@ -2,9 +2,7 @@
   <div class="time-schedule">
     <div class="percentage">
       <div class="progress">
-        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
-        <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
-        <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+        <div v-for="p in percentages" :key="p.task" class="progress-bar" :style="{ width: p.percentage + '%', 'background-color': p.color }"></div>
       </div>
     </div>
 
@@ -43,7 +41,8 @@
         minutes: ['00', '15', '30', '45'],
         records: {},
         selected: null,
-        tasks: []
+        tasks: [],
+        percentages: []
       };
     },
     computed: {
@@ -54,7 +53,8 @@
       this.dateChanged();
     },
     watch: {
-      date: 'dateChanged'
+      date: 'dateChanged',
+      records: 'updateProgressBar'
     },
     methods: {
       initialize: function() {
@@ -103,6 +103,24 @@
             this.error = error.message;
           }
         }
+      },
+      updateProgressBar: function() {
+        const counts = {};
+        let allCount = Object.keys(this.records).length;
+        for (const key in this.records) {
+          const task = this.records[key].task_name;
+          counts[task] = counts[task] ? counts[task] + 1 : 1;
+        }
+
+        const percentages = [];
+        for (const task in counts) {
+          percentages.push({
+            task_name: task,
+            percentage: (counts[task] / allCount) * 100,
+            color: 'red'
+          });
+        }
+        this.percentages = percentages;
       }
     }
   };
