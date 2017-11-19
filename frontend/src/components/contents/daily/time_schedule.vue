@@ -13,7 +13,7 @@
         <table class="table">
           <tr v-for="hour in hours" :key="hour">
             <td class="hour">{{ hour }} </td>
-            <td v-for="minute in minutes" :key="minute" class="enter yet" @click="select(hour, minute)" :class="{ active: isActive(hour, minute), recorded: records[hour + ':' + minute] }">
+            <td v-for="minute in minutes" :key="minute" class="enter" @click="select(hour, minute)" :class="cellClass(hour, minute)">
               <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute].task_name }}</span>
               <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
             </td>
@@ -81,11 +81,19 @@
           this.error = error.message;
         }
       },
-      select: function(hour, minute) {
-        this.selected = `${hour}:${minute}`;
+      time: function(hour, minute) {
+        return `${hour}:${minute}`;
       },
-      isActive: function(hour, minute) {
-        return this.selected == `${hour}:${minute}`;
+      select: function(hour, minute) {
+        this.selected = this.time(hour, minute);
+      },
+      cellClass: function(hour, minute) {
+        const time = this.time(hour, minute);
+        return {
+          active: this.selected == time,
+          yet: !this.records[time],
+          recorded: !!this.records[time]
+        };
       },
       record: async function(task) {
         if (this.selected) {
