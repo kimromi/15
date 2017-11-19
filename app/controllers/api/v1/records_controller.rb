@@ -15,6 +15,6 @@ class Api::V1::RecordsController < Api::V1::ApplicationController
   private
 
   def create_params
-    params.require(:record).permit(:at, :task_name)
+    params.require(:record).permit(:task_id, :at)
   end
 end

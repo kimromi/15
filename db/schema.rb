@@ -24,15 +24,6 @@ ActiveRecord::Schema.define(version: 20171113180443) do
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
-  create_table "identity_github_enterprises", force: :cascade do |t|
-    t.integer "identity_id"
-    t.string "api_url"
-    t.string "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["identity_id"], name: "index_identity_github_enterprises_on_identity_id"
-  end
-
   create_table "identity_githubs", force: :cascade do |t|
     t.integer "identity_id"
     t.string "token"
@@ -62,10 +53,11 @@ ActiveRecord::Schema.define(version: 20171113180443) do
   create_table "records", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
+    t.integer "task_id"
     t.datetime "at"
-    t.string "task_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_records_on_task_id"
     t.index ["team_id"], name: "index_records_on_team_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
@@ -75,6 +67,7 @@ ActiveRecord::Schema.define(version: 20171113180443) do
     t.integer "order"
     t.string "name", default: "", null: false
     t.string "background_color"
+    t.boolean "deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_tasks_on_team_id"

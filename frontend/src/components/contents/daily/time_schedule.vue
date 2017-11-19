@@ -11,8 +11,8 @@
         <table class="table">
           <tr v-for="hour in hours" :key="hour">
             <td class="hour">{{ hour }} </td>
-            <td v-for="minute in minutes" :key="minute" class="enter" @click="select(hour, minute)" :class="cellClass(hour, minute)">
-              <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute].task_name }}</span>
+            <td v-for="minute in minutes" :key="minute" class="enter" @click="select(hour, minute)" :class="cellClass(hour, minute)" :style="cellStyle(hour, minute)">
+              <span v-if="records[hour + ':' + minute]">{{ records[hour + ':' + minute].task.name }}</span>
               <span v-else>{{ minute }}-{{ parseInt(minute) + 15 }}</span>
             </td>
           </tr>
@@ -21,6 +21,9 @@
       <div class="enter-area col-xs-12 col-sm-4">
         <ul class="list-group tasks">
           <li class="list-group-item task" v-for="task in tasks" :key="task.id" @click="record(task)">
+            <div class="task-color" :style="{ 'background-color': task.background_color }">
+              &nbsp;
+            </div>
             {{ task.name }}
           </li>
         </ul>
@@ -95,10 +98,18 @@
           recorded: !!this.records[time]
         };
       },
+      cellStyle: function(hour, minute) {
+        const time = this.time(hour, minute);
+        if (!this.records[time]) {
+          return null;
+        } else {
+          return { 'background-color': this.records[time].task.background_color || '#FFF' };
+        }
+      },
       record: async function(task) {
         if (this.selected) {
-          this.records = Object.assign({}, this.records, { [this.selected]: {task_name: task.name}});
-          const { error } = await ApiClient.createRecord(this.date, this.selected, task.name);
+          this.records = Object.assign({}, this.records, { [this.selected]: {task: {name: task.name, background_color: task.background_color}}});
+          const { error } = await ApiClient.createRecord(this.date, this.selected, task.id);
           if (error) {
             this.error = error.message;
           }
@@ -178,7 +189,6 @@
             }
             td.recorded {
               color: #000;
-              background-color: #DDD;
               border: 1px solid #CCC;
               font-weight: bold;
             }
@@ -198,6 +208,14 @@
 
     .task {
       cursor: pointer;
+
+      .task-color {
+        display: inline-block;
+        width: 23px;
+        height: 23px;
+        border: 1px solid #DEDEDE;
+        margin-right: 3px;
+      }
     }
   }
 </style>

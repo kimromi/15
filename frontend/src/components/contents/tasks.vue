@@ -70,7 +70,7 @@
         }
       },
       destroy: async function(id) {
-        const { error } = await ApiClient.destroyTask(id);
+        const { error } = await ApiClient.deleteTask(id);
         if (!error) {
           this.tasks.some((task, i) => {
             if (task.id == id) this.tasks.splice(i, 1);

@@ -1,5 +1,9 @@
 class RecordSerializer < ActiveModel::Serializer
-  attributes :id, :task_name, :date, :time
+  attributes :id, :task, :date, :time
+
+  def task
+    object.task
+  end
 
   def date
     object.at.to_date

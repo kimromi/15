@@ -3,7 +3,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   protect_from_forgery except: :create
 
   def index
-    render json: current_team.tasks
+    render json: current_team.tasks.undeleted
   end
 
   def create
@@ -21,13 +21,6 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     render json: { message: 'Task not found' }, status: :not_found
   end
 
-  def destroy
-    task = current_team.tasks.find(params[:id])
-    render json: task.destroy!, status: :no_content
-  rescue ActiveRecord::RecordNotFound
-    render json: { message: 'Task not found' }, status: :not_found
-  end
-
   private
 
   def create_params
@@ -35,6 +28,6 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def update_params
-    params.require(:task).permit(:background_color)
+    params.require(:task).permit(:background_color, :deleted)
   end
 end
