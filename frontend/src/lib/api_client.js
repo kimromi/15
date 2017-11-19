@@ -5,10 +5,10 @@ export default class ApiClient {
     return this.format(await this.client().get(`api/v1/records/${date}`), 'records');
   }
 
-  static async createRecord(date, time, task_name) {
+  static async createRecord(date, time, taskId) {
     const params = {
       at: `${date} ${time}:00`,
-      task_name: task_name
+      task_id: taskId
     };
     return this.format(await this.client().post('api/v1/records', {record: params}));
   }
@@ -33,8 +33,8 @@ export default class ApiClient {
     return this.format(await this.client().patch(`api/v1/tasks/${id}`, {task: params}));
   }
 
-  static async destroyTask(id) {
-    return this.format(await this.client().delete(`api/v1/tasks/${id}`));
+  static async deleteTask(id) {
+    return this.format(await this.client().patch(`api/v1/tasks/${id}`, {task: {deleted: 'deleted'}}));
   }
 
   static client() {

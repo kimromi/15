@@ -2,7 +2,9 @@
   <div class="time-schedule">
     <div class="percentage">
       <div class="progress">
-        <div v-for="p in percentages" :key="p.task" class="progress-bar" :style="{ width: p.percentage + '%', 'background-color': p.color }"></div>
+        <div v-for="p in percentages" :key="p.task" class="progress-bar" :style="{ width: p.percentage + '%', 'background-color': p.color }" v-tooltip="tooltipContent(p)">
+          {{ p.task }}
+        </div>
       </div>
     </div>
 
@@ -117,21 +119,29 @@
       },
       updateProgressBar: function() {
         const counts = {};
+        const colors = {};
         let allCount = Object.keys(this.records).length;
+
         for (const key in this.records) {
-          const task = this.records[key].task_name;
+          const task = this.records[key].task.name;
           counts[task] = counts[task] ? counts[task] + 1 : 1;
+          colors[task] = this.records[key].task.background_color || '#FFF';
         }
 
         const percentages = [];
         for (const task in counts) {
           percentages.push({
-            task_name: task,
+            task: task,
+            hour: Math.floor(counts[task] / 4),
+            minute: (counts[task] % 4) * 15,
             percentage: (counts[task] / allCount) * 100,
-            color: 'red'
+            color: colors[task]
           });
         }
         this.percentages = percentages;
+      },
+      tooltipContent: function(percentage) {
+        return `${percentage.percentage.toFixed(2)}% - ${percentage.hour}h${percentage.minute}m`;
       }
     }
   };
@@ -148,6 +158,16 @@
       left: 0;
       padding: 0 30px 0 230px;
       width: 100%;
+
+      .progress {
+        height: 25px;
+        border: 1px solid #EEE;
+
+        .progress-bar {
+          line-height: 23px;
+          color: #000;
+        }
+      }
     }
 
     .time-table {
@@ -216,6 +236,55 @@
         border: 1px solid #DEDEDE;
         margin-right: 3px;
       }
+    }
+  }
+
+  .tooltip {
+    display: block !important;
+    z-index: 10000;
+
+    .tooltip-inner {
+      background: #1a1a1a;
+      color: white;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+
+    .tooltip-arrow {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      position: absolute;
+      margin: 5px;
+      border-color: #1a1a1a;
+      z-index: 1;
+    }
+
+    &[x-placement^="top"] {
+      margin-bottom: 5px;
+
+      .tooltip-arrow {
+        border-width: 5px 5px 0 5px;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        bottom: -5px;
+        left: calc(50% - 5px);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .15s, visibility .15s;
+    }
+
+    &[aria-hidden='false'] {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .15s;
     }
   }
 </style>
