@@ -32,6 +32,7 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
   import ApiClient from '../../lib/api_client';
   import { Compact } from 'vue-color';
 
@@ -43,25 +44,26 @@
       return {
         error: null,
         name: null,
-        tasks: [],
         selectedId: null,
         colors: { hex: '#aaaaaa' }
       };
     },
-    created: async function() {
-      let { tasks, error } = await ApiClient.tasks();
-      if (!error) {
-        this.tasks = tasks;
-      } else {
-        this.error = error.message;
-      }
+    computed: {
+      ...mapGetters([
+        'tasks'
+      ])
     },
     methods: {
+      ...mapActions([
+        'setTasks',
+        'addTask',
+        'deleteTask'
+      ]),
       add: async function() {
         if (this.name) {
           const { data, error } = await ApiClient.createTask({name: this.name});
           if (!error) {
-            this.tasks.push(data);
+            this.addTask(data);
             this.name = '';
             this.error = '';
           } else {
@@ -72,9 +74,7 @@
       destroy: async function(id) {
         const { error } = await ApiClient.deleteTask(id);
         if (!error) {
-          this.tasks.some((task, i) => {
-            if (task.id == id) this.tasks.splice(i, 1);
-          });
+          this.deleteTask(id);
           this.error = '';
         } else {
           this.error = error.message;
@@ -91,10 +91,11 @@
           const task = this.tasks[i];
           if (task.id == this.selectedId) {
             task.background_color = color.hex;
-            this.tasks = Object.assign([], this.tasks, task);
 
             const { error } = await ApiClient.updateTask(this.selectedId, {background_color: color.hex});
-            if (error) {
+            if (!error) {
+              this.setTasks(Object.assign([], this.tasks, task));
+            } else {
               this.error = error.message;
             }
 

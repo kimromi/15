@@ -46,15 +46,16 @@
         minutes: ['00', '15', '30', '45'],
         records: {},
         selected: null,
-        tasks: [],
         percentages: []
       };
     },
     computed: {
-      ...mapGetters(['date'])
+      ...mapGetters([
+        'date',
+        'tasks'
+      ])
     },
     created: function() {
-      this.initialize();
       this.dateChanged();
     },
     watch: {
@@ -62,19 +63,8 @@
       records: 'updateProgressBar'
     },
     methods: {
-      initialize: function() {
-        this.fetchTasks();
-      },
       dateChanged: async function() {
         await this.fetchRecords();
-      },
-      fetchTasks: async function() {
-        const { tasks, error } = await ApiClient.tasks();
-        if (!error) {
-          this.tasks = tasks;
-        } else {
-          this.error = error.message;
-        }
       },
       fetchRecords: async function() {
         const { records, error } = await ApiClient.records(this.date);

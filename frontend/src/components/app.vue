@@ -10,11 +10,22 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
   import Sidebar from './sidebar.vue';
+  import ApiClient from '../lib/api_client';
 
   export default {
     components: {
       sidebar: Sidebar
+    },
+    created: async function() {
+      let { tasks } = await ApiClient.tasks();
+      this.setTasks(tasks);
+    },
+    methods: {
+      ...mapActions([
+        'setTasks'
+      ]),
     }
   };
 </script>
