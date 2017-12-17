@@ -12,6 +12,10 @@ class Identity < ApplicationRecord
     def find_or_create_with_omniauth(auth)
       find_or_create_by(uid: auth['uid'], provider: auth['provider'].to_sym)
     end
+
+    def main
+      github.first
+    end
   end
 
   def create_user_with_omniauth!(auth)

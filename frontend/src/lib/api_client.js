@@ -37,6 +37,10 @@ export default class ApiClient {
     return this.format(await this.client().patch(`api/v1/tasks/${id}`, {task: {deleted: 'deleted'}}));
   }
 
+  static async members() {
+    return this.format(await this.client().get('api/v1/members'), 'members');
+  }
+
   static client() {
     const client = axios.create();
     client.interceptors.response.use((response) => {
