@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113180443) do
+ActiveRecord::Schema.define(version: 20171217110728) do
 
   create_table "identities", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20171113180443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["identity_id"], name: "index_identity_twitters_on_identity_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer "team_id"
+    t.string "token"
+    t.datetime "expired_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_invitations_on_team_id"
   end
 
   create_table "members", force: :cascade do |t|
