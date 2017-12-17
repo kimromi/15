@@ -1,0 +1,21 @@
+.container.page__invitation
+  .row
+    .col-xs-12.text-center.logo
+      img src="#{asset_path '15-logo-black.png'}"
+    .col-xs-12.text-center
+      h2
+        | You are invited to the 
+        span.team-name
+          = @team.name
+        |  team.
+    .col-xs-12.text-center
+      - if signed_in?
+        = form_for @invitation do |f|
+          = f.hidden_field :token
+          = f.submit "Join!", class: 'btn btn-success btn-lg'
+      - else
+        .row
+          .col-xs-12.col-sm-8.col-sm-offset-2
+            = link_to '/auth/github', class: 'btn btn-block btn-lg btn-default btn-github'
+              i.fa.fa-github
+              | &nbsp; Sign in and Join team with GitHub

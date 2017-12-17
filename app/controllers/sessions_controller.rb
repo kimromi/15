@@ -24,7 +24,19 @@ class SessionsController < ApplicationController
         session[:team] = nil
       end
 
-      redirect_to root_path, notice: 'Signed in!'
+      if session[:invitation_id]
+        invitation = Invitation.find(session[:invitation_id])
+        if invitation.team.members.pluck(:user_id).include?(current_user.id)
+          message = { alert: "Already join #{invitation.team.name} team." }
+        else
+          invitation.team.members.create(user_id: current_user.id)
+          message = { notice: "Signed in and Join #{invitation.team.name} team!" }
+        end
+        session[:invitation_id] = nil
+        redirect_to "/#{invitation.team.name}", message and return
+      end
+
+      redirect_to root_path, notice: message || 'Signed in!'
     end
   end
 

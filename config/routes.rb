@@ -20,8 +20,13 @@ Rails.application.routes.draw do
       get :teams, to: 'team#index'
       get :oauth, to: 'oauth#index'
       delete '/oauth/:provider', to: 'oauth#delete'
+
+      resources :members, only: %i(index)
+      get :invitation, to: 'invitation#index'
     end
   end
 
   get '/:team', to: 'app#index'
+  resources :invitations, param: :token, only: %i(show update)
+  get 'members/invitation/:token', to: 'invitations#show'
 end

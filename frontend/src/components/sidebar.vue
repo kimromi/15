@@ -25,6 +25,23 @@
             <i class="fa fa-calendar"></i> Today
           </router-link>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bar-chart"></i> Reports <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <router-link to="/reports/me">
+                <i class="fa fa-user"></i> Me
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/reports/team">
+                <i class="fa fa-users"></i> Team
+              </router-link>
+            </li>
+          </ul>
+        </li>
         <li>
           <router-link to="/tasks">
             <i class="fa fa-check-square-o"></i> Tasks
@@ -36,13 +53,13 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <router-link to="/team">
-                <i class="fa fa-users"></i> Team
+              <router-link to="/members/me">
+                <i class="fa fa-user"></i> Me
               </router-link>
             </li>
             <li>
-              <router-link to="/members/me">
-                <i class="fa fa-user"></i> Me
+              <router-link to="/team">
+                <i class="fa fa-users"></i> Team
               </router-link>
             </li>
             <li>
