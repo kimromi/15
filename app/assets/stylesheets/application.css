@@ -9,3 +9,18 @@
 html, body, #app {
   height: 100%;
 }
+
+.app-alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  width: 99%;
+  animation : fadeOut 4s;
+  animation-fill-mode: both;
+  margin: 0.5%;
+}
+@keyframes fadeOut {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}

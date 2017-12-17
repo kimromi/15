@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   end
 
   get '/:team', to: 'app#index'
+  resources :invitations, param: :token, only: %i(show update)
+  get 'members/invitation/:token', to: 'invitations#show'
 end

@@ -12,6 +12,12 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="viewport" content="width=device-width, initial-scale=1.0"
   body
+    - flash.each do |type, message|
+      - key = 'success' if type == 'notice'
+      - key = 'danger'  if type == 'alert'
+      div[class="app-alert alert alert-#{key}"]
+        button.close type="button" data-dismiss="alert" ×
+        = message
     = yield
     script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
     script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

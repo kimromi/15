@@ -1,0 +1,22 @@
+.page__invitation {
+  margin-top: 50px;
+
+  h2 {
+    margin-bottom: 50px;
+
+    .team-name {
+      color: red;
+    }
+  }
+
+  .btn {
+    font-size: 28px;
+    padding: 20px 80px;
+    color: #FFF;
+    text-transform: none;
+  }
+
+  .btn-github {
+    background-color: #333;
+  }
+}
