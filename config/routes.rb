@@ -16,8 +16,9 @@ Rails.application.routes.draw do
 
       get :teams, to: 'team#index'
       get :team, to: 'team#show'
+      delete :team, to: 'team#destroy'
+
       resources :tasks, only: %i(index create update)
-      get :teams, to: 'team#index'
       get :oauth, to: 'oauth#index'
       delete '/oauth/:provider', to: 'oauth#delete'
 

@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
   private
 
   def fetch_teams
-    @teams = current_user.teams if signed_in?
+    @teams = current_user.teams.available if signed_in?
   end
 
   def create_params

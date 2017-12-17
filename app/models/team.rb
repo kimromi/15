@@ -4,6 +4,8 @@ class Team < ApplicationRecord
   has_many :records
   has_many :invitations
 
+  enum deleted: { available: false, deleted: true }
+
   validates :name,
     presence: true,
     uniqueness: true,

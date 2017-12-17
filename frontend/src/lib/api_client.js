@@ -21,6 +21,10 @@ export default class ApiClient {
     return this.format(await this.client().get('api/v1/teams'), 'teams');
   }
 
+  static async deleteTeam() {
+    return this.format(await this.client().delete(`api/v1/team`));
+  }
+
   static async tasks() {
     return this.format(await this.client().get('api/v1/tasks'), 'tasks');
   }

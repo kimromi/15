@@ -16,6 +16,14 @@
         <input type="text" :value="invitation.url" readonly onfocus="this.select();"/>
       </div>
     </div>
+    <div class="row delete">
+      <div class="col-xs-12 col-sm-2 text-center delete__label">
+        Delete team
+      </div>
+      <div class="col-xs-12 col-sm-3">
+        <button class="btn btn-danger" @click="deleteTeam">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,6 +62,16 @@
         } else {
           this.error = error.message;
         }
+      },
+      deleteTeam: async function() {
+        if (confirm('Are you sure?')) {
+          const { error } = await ApiClient.deleteTeam();
+          if (!error) {
+            location.href = '/';
+          } else {
+            this.error = error;
+          }
+        }
       }
     }
   };
@@ -80,6 +98,14 @@
           background-color: #EEE;
           font-weight: bold;
         }
+      }
+    }
+
+    .delete {
+      margin-top: 70px;
+
+      .delete__label {
+        padding-top: 7px;
       }
     }
   }
