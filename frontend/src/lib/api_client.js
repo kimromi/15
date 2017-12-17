@@ -41,6 +41,10 @@ export default class ApiClient {
     return this.format(await this.client().get('api/v1/members'), 'members');
   }
 
+  static async invitation() {
+    return this.format(await this.client().get('api/v1/invitation'), 'invitation');
+  }
+
   static client() {
     const client = axios.create();
     client.interceptors.response.use((response) => {

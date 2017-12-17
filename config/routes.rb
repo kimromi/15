@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       delete '/oauth/:provider', to: 'oauth#delete'
 
       resources :members, only: %i(index)
+      get :invitation, to: 'invitation#index'
     end
   end
 
