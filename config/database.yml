@@ -1,4 +1,5 @@
 production:
+  adapter: mysql2
   url: <%= ENV['DATABASE_URL'] %>
 
 mysql: &mysql
