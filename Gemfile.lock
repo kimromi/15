@@ -136,7 +136,6 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
-    pg (0.21.0)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -253,7 +252,6 @@ DEPENDENCIES
   octokit
   omniauth-github
   omniauth-twitter
-  pg
   pry-byebug
   pry-rails
   puma (~> 3.7)
