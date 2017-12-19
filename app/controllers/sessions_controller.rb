@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  after_action :clear_session, only: %i(create destroy)
+
   def create
     auth = request.env['omniauth.auth']
     identity = Identity.find_or_create_with_omniauth(auth)
@@ -43,5 +45,12 @@ class SessionsController < ApplicationController
   def destroy
     sign_out
     redirect_to root_path, notice: "Sign out."
+  end
+
+  private
+
+  def clear_session
+    session[:team] = nil
+    session[:invitation_id] = nil
   end
 end
