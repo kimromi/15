@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
         team = Team.new(session[:team])
         team.save
         team.members.create(user_id: current_user.id)
-        session[:team] = nil
       end
 
       if session[:invitation_id]
@@ -34,7 +33,6 @@ class SessionsController < ApplicationController
           invitation.team.members.create(user_id: current_user.id)
           message = { notice: "Signed in and Join #{invitation.team.name} team!" }
         end
-        session[:invitation_id] = nil
         redirect_to "/#{invitation.team.name}", message and return
       end
 
