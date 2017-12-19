@@ -5,19 +5,12 @@
         <li class="sidebar-brand">
           <img src="/assets/15-logo.png"/>
         </li>
-        <li class="sidebar-teams">
-          <div v-if="teams.length == 0" class="wait">
+        <li class="sidebar-team">
+          <div v-if="Object.keys(currentTeam).length === 0" class="sidebar-team__wait">
             <i class="fa fa-spinner fa-spin"></i>
           </div>
-          <div v-else-if="teams.length == 1" class="one-team">
-            {{ teams[0].name }}
-          </div>
-          <div v-else>
-            <select class="form-control" v-model="selectedTeam" @change="teamChange">
-              <option v-for="team in teams" :key="team.id" :value="team.name">
-                {{ team.name }}
-              </option>
-            </select>
+          <div v-else class="sidebar-team__name">
+            {{ currentTeam.name }}
           </div>
         </li>
         <li>
@@ -80,13 +73,10 @@
   export default {
     mounted: function() {
       this.fetchCurrentTeam();
-      this.fetchTeams();
     },
     data: function() {
       return {
-        teams: [],
         currentTeam: {},
-        selectedTeam: null
       };
     },
     methods: {
@@ -96,15 +86,6 @@
           this.currentTeam = currentTeam;
           this.selectedTeam = currentTeam.name;
         }
-      },
-      fetchTeams: async function() {
-        const { teams, error } = await ApiClient.teams();
-        if (!error) {
-          this.teams = teams;
-        }
-      },
-      teamChange: function() {
-        location.href= `/${this.selectedTeam}#${this.$route.path}`;
       }
     }
   };
@@ -144,16 +125,16 @@
         }
       }
 
-      .sidebar-teams {
+      .sidebar-team {
         padding: 0px 15px 10px 15px;
 
-        .wait {
+        .sidebar-team__wait {
           text-align: center;
           font-size: 14px;
           line-height: 34px;
         }
 
-        .one-team {
+        .sidebar-team__name {
           text-align: center;
           padding: 5px 0;
           font-size: 18px;
