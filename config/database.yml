@@ -1,13 +1,16 @@
-production:
-  adapter: mysql2
-  url: <%= ENV['DATABASE_URL'] %>
-
 mysql: &mysql
   adapter: mysql2
-  reconnect: false
+  reconnect: true
   pool: 5
   strict: false
   encoding: ujis
+
+production:
+  <<: *mysql
+  database: <%= ENV['DATABASE_NAME'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 development:
   <<: *mysql
