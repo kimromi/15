@@ -22,5 +22,5 @@ html, body, #app {
 }
 @keyframes fadeOut {
   0%, 80% { opacity: 1; }
-  100% { opacity: 0; }
+  100% { opacity: 0; z-index: 0; }
 }
